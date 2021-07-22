@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jQuery发送get-post-通用方法</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+  <h2>jQuery发送AJAX请求</h2>
+  <hr>
+  <button>GET</button>
+  <button>POST</button>
+  <button>通用型方法-ajax</button>
+
+  <script>
+    $('button').eq(0).click(() => {
+      $.get('http://127.0.0.1:8000/jquery-server', { a: 100, b: 200 }, (data) => {
+        console.log(data)
+      }, 'json')
+    })
+    $('button').eq(1).click(() => {
+      $.post('http://127.0.0.1:8000/jquery-server', { a: 100, b: 200 }, (data) => {
+        console.log(data)
+      })
+    })
+    $('button').eq(2).click(() => {
+      $.ajax({
+        //  url
+        url: 'http://127.0.0.1:8000/jquery-server',
+        //  参数
+        data: { a: 100, b: 200 },
+        // 响应体结果
+        dataType: 'json',
+        // 请求类型
+        type: 'GET',
+        // 超时时间
+        timeout: 2000,
+        // 成功回调
+        success: (data) => {
+          console.log(data)
+        },
+        // 失败回调
+        error: () => {
+          console.log('出错了！')
+
+        }
+      })
+    })
+  </script>
+</body>
+
+</html>

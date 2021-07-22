@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <title>axios发送AJAX请求</title>
+
+</head>
+
+<body>
+  <h2>axios发送AJAX请求</h2>
+  <hr>
+  <button>GET</button>
+  <button>POST</button>
+  <button>通用型方法-ajax</button>
+
+  <script>
+    const btns = document.querySelectorAll('button')
+    axios.defaults.baseURL = 'http://127.0.0.1:8000'
+    btns[0].addEventListener('click', () => {
+      axios.get('/axios-server', {
+        // url
+        params: {
+          id: 100,
+          vip: 7
+        },
+        // 请求头
+        headers: {
+          name: 'LaO_Huang_Z19',
+          age: 20
+        }
+      }).then(value => {
+        console.log(value.data.name)
+      })
+    })
+    btns[1].addEventListener('click', () => {
+      axios.post('/axios-server', {
+        username: 'admin',
+        password: 'admin'
+      }, {
+        // url
+        params: {
+          id: 100,
+          vip: 100
+        },
+        // 请求头参数
+        headers: {
+          height: '185',
+          weight: '145'
+        },
+      })
+    })
+    btns[2].addEventListener('click', () => {
+      axios({
+        url: '/axios-server',
+        // 请求方法
+        method: 'POST',
+        // url参数
+        params: {
+          vip: 10,
+          leverl: 30
+        },
+        // 头信息
+        headers: {
+          a: 100,
+          b: 200
+        },
+        // 请求体参数
+        data: {
+          username: 'admin',
+          password: 'admin'
+        }
+      }).then(value => {
+        console.log(value.data.name)
+      })
+    })
+  </script>
+</body>
+
+</html>
